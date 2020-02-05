@@ -693,8 +693,8 @@ class CompActGet(Resource):
 
 ###### Front End Routes #####
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 
 @app.route('/home', methods=['GET', 'POST'])
 def index():
