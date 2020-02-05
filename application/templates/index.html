@@ -1,0 +1,457 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1>Welcome to Load Tracking API</h1>
+
+            {% if session['company'] %}
+                <h3>Let's get started...</h3>
+                
+                <div class="container">
+                    <div class="accordion" id="accordionExample">
+                        <div class="card">
+                          <div class="card-header" id="headingOne">
+                            <h2 class="mb-0 text-left">
+                              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <h3>Fulfillment Center</h3>
+                              </button>
+                            </h2>
+                          </div>
+                      
+                          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                            <div class="card-body">
+                              
+                                <div class="row row-cols-1 row-cols-md-2">
+                                    <div class="col mb-4">
+                                      <div class="card">
+                                        <div class="card-body text-left">
+                                          <h5 class="card-title">Get all available fulfillment centers</h5>
+                                          <code class="card-text">GET: /fc</code>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col mb-4">
+                                        <div class="card">
+                                          <div class="card-body text-left">
+                                            <h5 class="card-title">Get one particular fulfillment center </h5>
+                                            <code class="card-text">GET: /fc/{fc_id}</code>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    <div class="col mb-4">
+                                      <div class="card">
+                                        <div class="card-body text-left">
+                                          <h5 class="card-title">Post a fulfillment center</h5>
+                                          <code class="card-text">POST: /fc<br>Request (application/json)<br> 
+                                            
+                                                body:<br> 
+                                                &nbsp;{<br> 
+                                                    &nbsp;&nbsp;"fc_name": "WareHouse 1",<br> 
+                                                    &nbsp;&nbsp;"fc_address": "1 Main St",<br> 
+                                                    &nbsp;&nbsp;"fc_city": "Best City",<br> 
+                                                    &nbsp;&nbsp;"fc_zip":"11111"<br> 
+                                                        &nbsp;}
+                                            </code>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col mb-4">
+                                        <div class="card">
+                                          <div class="card-body text-left">
+                                            <h5 class="card-title">Update a fulfillment center</h5>
+                                            <code class="card-text">PUT: /fc/{fc_id}<br>Request (application/json)<br> 
+                                              
+                                                  body:<br> 
+                                                  &nbsp;{<br> 
+                                                      &nbsp;&nbsp;"fc_name": "WareHouse 2",<br> 
+                                                      &nbsp;&nbsp;"fc_address": "2 Main St",<br> 
+                                                      &nbsp;&nbsp;"fc_city": "Some City",<br> 
+                                                      &nbsp;&nbsp;"fc_zip":"22222"<br> 
+                                                          &nbsp;}
+                                              </code>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    
+                                      <div class="col mb-4">
+                                        <div class="card">
+                                          <div class="card-body text-left">
+                                            <h5 class="card-title">Delete a fulfillment center</h5>
+                                            <code class="card-text">DELETE: /fc/{fc_id}</code>
+                                          </div>
+                                        </div>
+                                      </div>
+                                  </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="card">
+                          <div class="card-header text-left" id="headingTwo">
+                            <h2 class="mb-0">
+                              <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                <h3>Company</h3>
+                              </button>
+                            </h2>
+                          </div>
+                          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                            <div class="card-body">
+                             
+                                <div class="row row-cols-1 row-cols-md-2">
+                                    <div class="col mb-4">
+                                      <div class="card">
+                                        <div class="card-body text-left">
+                                          <h5 class="card-title">Get all available companies</h5>
+                                          <code class="card-text">GET: /company</code>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="col mb-4">
+                                        <div class="card">
+                                          <div class="card-body text-left">
+                                            <h5 class="card-title">Get one particular company </h5>
+                                            <code class="card-text">GET: /company/{company_id}</code>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    <div class="col mb-4">
+                                      <div class="card">
+                                        <div class="card-body text-left">
+                                          <h5 class="card-title">Post a company</h5>
+                                          <code class="card-text">POST: /company<br>Request (application/json)<br> 
+                                            
+                                                body:<br> 
+                                                &nbsp;{<br> 
+                                                    &nbsp;&nbsp;"fc_id": 1,<br> 
+                                                    &nbsp;&nbsp;"company_name": "The Best Company",<br> 
+                                                    &nbsp;&nbsp;"email": "bestcompany@mail.com",<br> 
+                                                    &nbsp;&nbsp;"password":"secretpassword"<br> 
+                                                        &nbsp;}
+                                            </code>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="col mb-4">
+                                        <div class="card">
+                                          <div class="card-body text-left">
+                                            <h5 class="card-title">Update a company</h5>
+                                            <code class="card-text">PUT: /company/{company_id}<br>Request (application/json)<br> 
+                                              
+                                                  body:<br> 
+                                                  &nbsp;{<br> 
+                                                      &nbsp;&nbsp;"fc_id": 2,<br> 
+                                                      &nbsp;&nbsp;"company_name": "Not The Best Company",<br> 
+                                                      &nbsp;&nbsp;"email": "new@mail.com",<br> 
+                                                      &nbsp;&nbsp;"password":"newpassword"<br> 
+                                                          &nbsp;}
+                                              </code>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    
+                                      <div class="col mb-4">
+                                        <div class="card">
+                                          <div class="card-body text-left">
+                                            <h5 class="card-title">Delete a company</h5>
+                                            <code class="card-text">DELETE: /company/{company_id}</code>
+                                          </div>
+                                        </div>
+                                      </div>
+                                  </div>
+  
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header text-left" id="headingThree">
+                              <h2 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                  <h3>Van</h3>
+                                </button>
+                              </h2>
+                            </div>
+                            <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                              <div class="card-body">
+                               
+                                  <div class="row row-cols-1 row-cols-md-2">
+                                      <div class="col mb-4">
+                                        <div class="card">
+                                          <div class="card-body text-left">
+                                            <h5 class="card-title">Get all available vanss</h5>
+                                            <code class="card-text">GET: /van</code>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col mb-4">
+                                          <div class="card">
+                                            <div class="card-body text-left">
+                                              <h5 class="card-title">Get one particular van </h5>
+                                              <code class="card-text">GET: /van/{van_id}</code>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      <div class="col mb-4">
+                                        <div class="card">
+                                          <div class="card-body text-left">
+                                            <h5 class="card-title">Post a van</h5>
+                                            <code class="card-text">POST: /van<br>Request (application/json)<br> 
+                                              
+                                                  body:<br> 
+                                                  &nbsp;{<br> 
+                                                      &nbsp;&nbsp;"company_id": 1,<br>
+                                                      &nbsp;&nbsp;"vin": "11111111111111111"<br> 
+                                                          &nbsp;}
+                                              </code>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      
+                                        <div class="col mb-4">
+                                          <div class="card">
+                                            <div class="card-body text-left">
+                                              <h5 class="card-title">Delete a van</h5>
+                                              <code class="card-text">DELETE: /van/{van_id}</code>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+    
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="card">
+                            <div class="card-header text-left" id="headingFour">
+                              <h2 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                                  <h3>Schedule wave</h3>
+                                </button>
+                              </h2>
+                            </div>
+                            <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                              <div class="card-body">
+                               
+                                  <div class="row row-cols-1 row-cols-md-2">
+                                      <div class="col mb-4">
+                                        <div class="card">
+                                          <div class="card-body text-left">
+                                            <h5 class="card-title">Get all available waves</h5>
+                                            <code class="card-text">GET: /wave</code>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col mb-4">
+                                          <div class="card">
+                                            <div class="card-body text-left">
+                                              <h5 class="card-title">Get one particular wave</h5>
+                                              <code class="card-text">GET: /wave/{wave_id}</code>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      <div class="col mb-4">
+                                        <div class="card">
+                                          <div class="card-body text-left">
+                                            <h5 class="card-title">Post a wave</h5>
+                                            <code class="card-text">POST: /wave<br>Request (application/json)<br> 
+                                              
+                                                  body:<br> 
+                                                  &nbsp;{<br> 
+                                                      &nbsp;&nbsp;"company_id": 1,<br>
+                                                      &nbsp;&nbsp;"start_time": "2020-01-1 11:00:00",<br>
+                                                      &nbsp;&nbsp;"end_time": "2020-01-1 11:30:00",<br>
+                                                      &nbsp;&nbsp;"status": true/false<br> 
+                                                          &nbsp;}
+                                              </code>
+                                          </div>
+                                        </div>
+                                      </div>
+  
+                                      <div class="col mb-4">
+                                          <div class="card">
+                                            <div class="card-body text-left">
+                                              <h5 class="card-title">Update a wave</h5>
+                                              <code class="card-text">PUT: /wave/{wave_id}<br>Request (application/json)<br> 
+                                                
+                                                    body:<br> 
+                                                    &nbsp;{<br> 
+                                                        &nbsp;&nbsp;"company_id": 2,<br>
+                                                        &nbsp;&nbsp;"start_time": "2020-02-2 20:00:00",<br>
+                                                        &nbsp;&nbsp;"end_time": "2020-02-2 20:30:00",<br>
+                                                        &nbsp;&nbsp;"status": false/true<br> 
+                                                            &nbsp;}
+                                                </code>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      
+                                        <div class="col mb-4">
+                                          <div class="card">
+                                            <div class="card-body text-left">
+                                              <h5 class="card-title">Delete a wave</h5>
+                                              <code class="card-text">DELETE: /wave/{wave_id}</code>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+    
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="card">
+                            <div class="card-header text-left" id="headingFive">
+                              <h2 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                                  <h3>Activity</h3>
+                                </button>
+                              </h2>
+                            </div>
+                            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                              <div class="card-body">
+                               
+                                  <div class="row row-cols-1 row-cols-md-2">
+                                      <div class="col mb-4">
+                                        <div class="card">
+                                          <div class="card-body text-left">
+                                            <h5 class="card-title">Get all activities</h5>
+                                            <code class="card-text">GET: /activity</code>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col mb-4">
+                                          <div class="card">
+                                            <div class="card-body text-left">
+                                              <h5 class="card-title">Get one particular activity </h5>
+                                              <code class="card-text">GET: /activity/{act_id}</code>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      <div class="col mb-4">
+                                        <div class="card">
+                                          <div class="card-body text-left">
+                                            <h5 class="card-title">Post an activity</h5>
+                                            <code class="card-text">POST: /activity<br>Request (application/json)<br> 
+                                              
+                                                  body:<br> 
+                                                  &nbsp;{<br> 
+                                                      &nbsp;&nbsp;"van_id": 1,<br>
+                                                      &nbsp;&nbsp;"wave_id": 2<br> 
+                                                          &nbsp;}
+                                              </code>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      
+                                        <div class="col mb-4">
+                                          <div class="card">
+                                            <div class="card-body text-left">
+                                              <h5 class="card-title">Delete an activity</h5>
+                                              <code class="card-text">DELETE: /activity/{act_id}</code>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+    
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="card">
+                            <div class="card-header text-left" id="headingSix">
+                              <h2 class="mb-0">
+                                <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                                  <h3>Aggregated queries</h3>
+                                </button>
+                              </h2>
+                            </div>
+                            <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+                              <div class="card-body">
+                               
+                                  <div class="row row-cols-1 row-cols-md-2">
+                                      <div class="col mb-4">
+                                        <div class="card">
+                                          <div class="card-body text-left">
+                                            <h5 class="card-title">Get waves by company id</h5>
+                                            <code class="card-text">GET: /comp_wave/{company_id}</code>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col mb-4">
+                                          <div class="card">
+                                            <div class="card-body text-left">
+                                              <h5 class="card-title">Get vans by company id </h5>
+                                              <code class="card-text">GET: /comp_van/{company_id}</code>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      <div class="col mb-4">
+                                        <div class="card">
+                                          <div class="card-body text-left">
+                                            <h5 class="card-title">Get activities by van id</h5>
+                                            <code class="card-text">GET: /van_act/{van_id}</code>
+                                          </div>
+                                        </div>
+                                      </div>
+  
+                                      <div class="col mb-4">
+                                          <div class="card">
+                                            <div class="card-body text-left">
+                                                <h5 class="card-title">Get activities by wave id</h5>
+                                                <code class="card-text">GET: /wave_act/{wave_id}</code>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      
+                                        <div class="col mb-4">
+                                          <div class="card">
+                                            <div class="card-body text-left">
+                                                <h5 class="card-title">Get activities by company id</h5>
+                                                <code class="card-text">GET: /comp_act/{comp_id}</code>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+    
+                              </div>
+                            </div>
+                          </div>
+                </div>
+            {% else %}
+                <h3>Do you have an account with us? Login</h3>
+                <div class="row">
+                    <div class="col-md-6 offset-md-3">
+                        <form name="login" action="" method="post" novalidate>
+                            <fieldset class="form-group">
+                                <legend>{{title}}</legend> 
+                                {{ form.hidden_tag() }}
+                
+                                <p>
+                                    {{ form.email.label }}<br>
+                                    {{ form.email(size=35) }}
+                                    {% for error in form.email.errors %}
+                                        <span class="error-message">{{ error }}</span>
+                                    {% endfor %}
+                                </p>
+                                <p>
+                                    {{ form.password.label }}<br>
+                                    {{ form.password(size=15) }}
+                                    {% for error in form.password.errors %}
+                                        <span class="error-message">{{ error }}</span>
+                                    {% endfor %}
+                                </p>
+                
+                                <p>{{ form.submit() }}</p>
+                                    
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+{% endblock %}
