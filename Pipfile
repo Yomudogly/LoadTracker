@@ -15,6 +15,7 @@ dnspython = "*"
 flask-security = "*"
 flask-restplus = "*"
 flask-jwt-simple = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.8"
