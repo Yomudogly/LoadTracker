@@ -17,4 +17,4 @@ public/
 .flaskenv
 
 # ignore mac custom attributes file
-.DS_Store
+*.DS_Store
