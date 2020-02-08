@@ -16,6 +16,8 @@ flask-security = "*"
 flask-restplus = "*"
 flask-jwt-simple = "*"
 gunicorn = "*"
+werkzeug = "==0.16.1"
+flask-cors = "*"
 
 [requires]
 python_version = "3.8"

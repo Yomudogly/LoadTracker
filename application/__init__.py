@@ -3,8 +3,11 @@ from config import Config
 from flask_mongoengine import MongoEngine
 from flask_restplus import Api
 from flask_jwt_simple import JWTManager
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app)
 blueprint = Blueprint('api', __name__, url_prefix='/api')
 api = Api(blueprint,
           title='Time Tracking API',
