@@ -107,7 +107,6 @@ class CompanyGetUpdateDelete(Resource):
 class Login(Resource):
     
     # POST 
-    @crossdomain(origin='*', automatic_options=False)
     def post(self):
 
         data = api.payload
