@@ -103,13 +103,11 @@ class CompanyGetUpdateDelete(Resource):
     
 
 ###### LOGIN #####
- 
+@crossdomain(origin='*') 
 @api.route('/login')
-
 class Login(Resource):
     
-    # POST
-    @crossdomain(origin='*') 
+    # POST 
     def post(self):
 
         data = api.payload
