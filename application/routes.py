@@ -102,12 +102,12 @@ class CompanyGetUpdateDelete(Resource):
         return jsonify( message='User was deleted successfully!')
     
 
-###### LOGIN #####
-@crossdomain(origin='*') 
+###### LOGIN ##### 
 @api.route('/login')
 class Login(Resource):
     
     # POST 
+    @crossdomain(origin='*')
     def post(self):
 
         data = api.payload
