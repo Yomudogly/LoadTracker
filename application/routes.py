@@ -107,7 +107,6 @@ class CompanyGetUpdateDelete(Resource):
 class Login(Resource):
     
     # POST 
-    @crossdomain(origin='*')
     def post(self):
 
         data = api.payload
@@ -697,6 +696,7 @@ class CompActGet(Resource):
 @app.route('/index', methods=['GET', 'POST'])
 
 @app.route('/home', methods=['GET', 'POST'])
+@crossdomain(origin='*')
 def index():
     form = LoginForm()
     if form.validate_on_submit():
