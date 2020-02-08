@@ -5,7 +5,7 @@ import time
 from application.models import Fullfilment_center, Company, Van, Schedule_wave, Activity
 from application.forms import LoginForm
 from application.utils import encoder, crossdomain
-from flask_restplus import Resource, abort, cors
+from flask_restplus import Resource, abort
 from flask_jwt_simple import jwt_required, create_jwt, get_jwt_identity
 
 
@@ -107,7 +107,7 @@ class CompanyGetUpdateDelete(Resource):
 class Login(Resource):
     
     # POST 
-    @cors.crossdomain(origin='*', automatic_options=False)
+    @crossdomain(origin='*', automatic_options=False)
     def post(self):
 
         data = api.payload
