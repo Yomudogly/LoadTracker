@@ -224,11 +224,14 @@ class ActGetAndPost(Resource):
     @jwt_required
     def post(self):
         data = api.payload 
-        activity = Activity(van_id=data['van_id'], wave_id=data['wave_id'])
+        activity = Activity(vin=data['vin'], wave_id=data['wave_id'])
         data['act_id'] = time.time()
         activity.act_id = int(data['act_id'])
-        activity.save()
-        return jsonify(Activity.objects(act_id=activity.act_id))
+        if Van.objects(vin=activity.vin).first():
+            activity.save()
+            return jsonify(Activity.objects(act_id=activity.act_id))
+        else:
+            return jsonify(message="This vin does not exist"), 400
         # ???  how to specify input of DateTimeField ????
         # "start_time": "2020-01-1 20:09:44"
           

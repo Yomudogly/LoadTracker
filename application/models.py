@@ -38,6 +38,6 @@ class Schedule_wave(db.Document):
     
 class Activity(db.Document):
     act_id = db.IntField( unique=True )
-    van_id = db.IntField()
+    vin = db.StringField( max_length=17 )
     wave_id = db.IntField()
     scan_time = db.DateTimeField( default=datetime.datetime.utcnow() )
