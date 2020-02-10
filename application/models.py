@@ -26,7 +26,7 @@ class Company(db.Document):
     
 class Van(db.Document):
     van_id = db.IntField( unique=True )
-    company_id = db.IntField()
+    company_name = db.StringField()
     vin = db.StringField( max_length=17, unique=True  )
     
 class Schedule_wave(db.Document):
