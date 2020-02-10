@@ -224,7 +224,7 @@ class ActGetAndPost(Resource):
     @jwt_required
     def post(self):
         data = api.payload 
-        activity = Activity(vin=data['vin'], wave_id=data['wave_id'])
+        activity = Activity(vin=data['vin'])
         data['act_id'] = time.time()
         activity.act_id = int(data['act_id'])
         if Van.objects(vin=activity.vin).first():
@@ -436,7 +436,6 @@ class VanActGet(Resource):
                         'van_id': '$van_id', 
                         'vin': '$vin', 
                         'company_id': '$company_id',
-                        'wave_id': '$activities.wave_id',
                         'scan_time': {
                             '$dateToString': {
                                 'format': '%Y-%m-%d %H:%M:%S', 
@@ -467,104 +466,6 @@ class VanActGet(Resource):
                         '_id': '$$REMOVE', 
                         'vin': '$vin', 
                         'company_id': '$company_id',
-                        'wave_id': '$activities.wave_id',
-                        'scan_time': {
-                            '$dateToString': {
-                                'format': '%Y-%m-%d %H:%M:%S', 
-                                'date': '$activities.scan_time'
-                            }
-                        }
-                        
-                    }
-                }
-            ])
-        resp_string = encoder.encode(list(resp))
-        return json.loads(resp_string), 200
-
-
-####### ACTIVITY BY WAVE ID ##########
-    
-@api.route('/wave_act/<int:idx>', '/wave_act')
-class WaveActGet(Resource):
-    
-    # GET ALL BY ID
-    @jwt_required
-    def get(self, idx=None):
-        
-        resp = None
-        if idx is None:
-            resp = Schedule_wave.objects.aggregate(*[
-                {
-                    '$lookup': {
-                        'from': 'activity', 
-                        'localField': 'wave_id', 
-                        'foreignField': 'wave_id', 
-                        'as': 'activities'
-                    }
-                }, {
-                    '$unwind': {
-                        'path': '$activities', 
-                        'preserveNullAndEmptyArrays': False
-                    }
-                }, {
-                    '$project': {
-                        '_id': '$$REMOVE',   
-                        'company_id': '$company_id',
-                        'wave_status': '$status', 
-                        'start_time': {
-                            '$dateToString': {
-                                'format': '%Y-%m-%d %H:%M:%S', 
-                                'date': '$start_time'
-                            }
-                        }, 
-                        'end_time': {
-                            '$dateToString': {
-                                'format': '%Y-%m-%d %H:%M:%S', 
-                                'date': '$end_time'
-                            }
-                        },
-                        'scan_time': {
-                            '$dateToString': {
-                                'format': '%Y-%m-%d %H:%M:%S', 
-                                'date': '$activities.scan_time'
-                            }
-                        }
-                        
-                    }
-                }
-            ])
-        else:
-            resp = Schedule_wave.objects.aggregate(*[
-                { '$match': { 'wave_id' : idx } },
-                {
-                    '$lookup': {
-                        'from': 'activity', 
-                        'localField': 'wave_id', 
-                        'foreignField': 'wave_id', 
-                        'as': 'activities'
-                    }
-                }, {
-                    '$unwind': {
-                        'path': '$activities', 
-                        'preserveNullAndEmptyArrays': False
-                    }
-                }, {
-                    '$project': {
-                        '_id': '$$REMOVE',   
-                        'company_id': '$company_id',
-                        'wave_status': '$status', 
-                        'start_time': {
-                            '$dateToString': {
-                                'format': '%Y-%m-%d %H:%M:%S', 
-                                'date': '$start_time'
-                            }
-                        }, 
-                        'end_time': {
-                            '$dateToString': {
-                                'format': '%Y-%m-%d %H:%M:%S', 
-                                'date': '$end_time'
-                            }
-                        },
                         'scan_time': {
                             '$dateToString': {
                                 'format': '%Y-%m-%d %H:%M:%S', 
@@ -630,8 +531,7 @@ class CompActGet(Resource):
                         'company_id': '$company_id', 
                         'company_name': '$company_name', 
                         'van_id': '$van_id', 
-                        'vin': '$vin', 
-                        'wave_id': '$activities.wave_id', 
+                        'vin': '$vin',  
                         'scan_time': {
                             '$dateToString': {
                                 'format': '%Y-%m-%d %H:%M:%S', 
@@ -681,8 +581,7 @@ class CompActGet(Resource):
                     '$project': {
                         'company_name': '$company_name', 
                         'van_id': '$van_id', 
-                        'vin': '$vin', 
-                        'wave_id': '$activities.wave_id', 
+                        'vin': '$vin',
                         'scan_time': {
                             '$dateToString': {
                                 'format': '%Y-%m-%d %H:%M:%S', 
