@@ -145,7 +145,7 @@ class VanGetAndPost(Resource):
             van.save() 
             return jsonify(Van.objects(van_id=van.van_id))
         else:
-            return jsonify(message="This company does not exist or you misspelled company name"), 404
+            return jsonify(message="This company does not exist or you misspelled company name"), 400
             
     
 
