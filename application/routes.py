@@ -155,7 +155,7 @@ class VanGetDelete(Resource):
     # GET ONE
     @jwt_required
     def get(self, idx: int):
-        return jsonify(Van.objects(van_id=idx)).first()
+        return jsonify(Van.objects(van_id=idx).first())
     
     # DELETE
     @jwt_required
