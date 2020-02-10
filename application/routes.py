@@ -138,10 +138,10 @@ class VanGetAndPost(Resource):
     @jwt_required
     def post(self):
         data = api.payload
-        van = Van(company_name=data['company_nme'], vin=data['vin'])
+        van = Van(company_name=data['company_name'], vin=data['vin'])
         data['van_id'] = time.time()
         van.van_id = int(data['van_id'])
-        if Company.objects(company_name=van.company_name):
+        if Company.objects(company_name=van.company_name).first():
             van.save() 
             return jsonify(Van.objects(van_id=van.van_id))
         else:
