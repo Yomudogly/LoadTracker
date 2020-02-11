@@ -247,6 +247,7 @@ class ActGetAndPost(Resource):
             ])
             resp_string = encoder.encode(list(resp))
             return json.loads(resp_string), 200
+            # return jsonify(Activity.objects(act_id=activity.act_id))
         else:
             return jsonify(message="This vin does not exist"), 400
         # ???  how to specify input of DateTimeField ????
