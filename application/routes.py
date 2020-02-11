@@ -229,7 +229,8 @@ class ActGetAndPost(Resource):
         activity.act_id = int(data['act_id'])
         if Van.objects(vin=activity.vin).first():
             activity.save()
-            resp = Activity.objects(act_id=activity.act_id).aggregate(*[
+            resp = Activity.objects.aggregate(*[
+                { '$match': { 'act_id' : activity.act_id } },
                 {
                     '$project': {
                         '_id': '$$REMOVE', 
