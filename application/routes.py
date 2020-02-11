@@ -229,7 +229,7 @@ class ActGetAndPost(Resource):
         activity.act_id = int(data['act_id'])
         if Van.objects(vin=activity.vin).first():
             activity.save()
-            return jsonify(Activity.objects(act_id=activity.act_id).aggregate(*[
+            resp = Activity.objects(act_id=activity.act_id).aggregate(*[
                 {
                     '$project': {
                         '_id': '$$REMOVE', 
@@ -243,7 +243,9 @@ class ActGetAndPost(Resource):
                         }
                     }
                 }
-            ]))
+            ])
+            resp_string = encoder.encode(list(resp))
+            return json.loads(resp_string), 200
         else:
             return jsonify(message="This vin does not exist"), 400
         # ???  how to specify input of DateTimeField ????
