@@ -249,7 +249,7 @@ class ActGetAndPost(Resource):
             return json.loads(resp_string), 200
             # return jsonify(Activity.objects(act_id=activity.act_id))
         else:
-            self.error(value, 'VIN is not registered')
+            self.error('VIN is not registered')
         # ???  how to specify input of DateTimeField ????
         # "start_time": "2020-01-1 20:09:44"
           
