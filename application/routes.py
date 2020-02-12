@@ -7,7 +7,6 @@ from application.forms import LoginForm
 from application.utils import encoder
 from flask_restplus import Resource, abort
 from flask_jwt_simple import jwt_required, create_jwt, get_jwt_identity
-from werkzeug.exceptions import BadRequest
 
 
 
@@ -250,7 +249,7 @@ class ActGetAndPost(Resource):
             return json.loads(resp_string), 200
             # return jsonify(Activity.objects(act_id=activity.act_id))
         else:
-            raise BadRequest("This vin does not exist", 400)
+            abort(400, checkit='This vin does not exist')
         # ???  how to specify input of DateTimeField ????
         # "start_time": "2020-01-1 20:09:44"
           
