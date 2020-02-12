@@ -250,7 +250,7 @@ class ActGetAndPost(Resource):
             return json.loads(resp_string), 200
             # return jsonify(Activity.objects(act_id=activity.act_id))
         else:
-            raise BadRequest(message="This vin does not exist")
+            raise BadRequest("This vin does not exist", 400)
         # ???  how to specify input of DateTimeField ????
         # "start_time": "2020-01-1 20:09:44"
           
