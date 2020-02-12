@@ -27,7 +27,7 @@ class Company(db.Document):
 class Van(db.Document):
     van_id = db.IntField( unique=True )
     company_name = db.StringField()
-    vin = db.StringField( max_length=17, unique=True  )
+    vin = db.StringField( unique=True )
     
 class Schedule_wave(db.Document):
     wave_id = db.IntField( unique=True )
@@ -38,5 +38,5 @@ class Schedule_wave(db.Document):
     
 class Activity(db.Document):
     act_id = db.IntField( unique=True )
-    vin = db.StringField( max_length=17 )
+    vin = db.StringField()
     scan_time = db.DateTimeField( default=datetime.datetime.utcnow() )
