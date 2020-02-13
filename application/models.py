@@ -32,11 +32,11 @@ class Van(db.Document):
 class Schedule_wave(db.Document):
     wave_id = db.IntField( unique=True )
     company_id = db.IntField()
-    start_time = db.DateTimeField( default=datetime.datetime.utcnow() )
-    end_time = db.DateTimeField( default=datetime.datetime.utcnow() )
+    start_time = db.DateTimeField( default=datetime.datetime.now() )
+    end_time = db.DateTimeField( default=datetime.datetime.now() )
     status = db.BooleanField( default=True )
     
 class Activity(db.Document):
     act_id = db.IntField( unique=True )
     vin = db.StringField()
-    scan_time = db.DateTimeField( default=datetime.datetime.utcnow() )
+    scan_time = db.DateTimeField( default=datetime.datetime.now() )
