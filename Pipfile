@@ -18,6 +18,7 @@ flask-jwt-simple = "*"
 gunicorn = "*"
 werkzeug = "==0.16.1"
 flask-cors = "*"
+tzlocal = "*"
 
 [requires]
 python_version = "3.8"
