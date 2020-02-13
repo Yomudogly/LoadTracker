@@ -224,7 +224,7 @@ class ActGetAndPost(Resource):
     @jwt_required
     def post(self):
         data = api.payload 
-        activity = Activity(vin=data['vin'])
+        activity = Activity(vin=data['vin'], scan_time=data['scan_time'])
         data['act_id'] = time.time()
         activity.act_id = int(data['act_id'])
         if Van.objects(vin=activity.vin).first():
