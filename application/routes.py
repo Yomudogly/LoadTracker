@@ -233,8 +233,8 @@ class ActGetAndPost(Resource):
                     }
                 }
             ])
-            resp_string = encoder.encode(list(resp))
-            return json.loads(resp_string), 200
+        resp_string = encoder.encode(list(resp))
+        return json.loads(resp_string), 200
     
     # POST
     @jwt_required
