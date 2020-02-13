@@ -6,7 +6,7 @@ from pytz import timezone
 from tzlocal import get_localzone
 
 # Current time in UTC
-now_utc = datetime.now(timezone('UTC'))
+now_utc = datetime.now(timezone('US/Eastern'))
 now_local = now_utc.astimezone(get_localzone())
 
 
