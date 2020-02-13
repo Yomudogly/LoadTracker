@@ -218,7 +218,23 @@ class ActGetAndPost(Resource):
     # GET ALL
     @jwt_required
     def get(self):
-        return jsonify(Activity.objects.all())
+        resp = Activity.objects.aggregate(*[
+                {
+                    '$project': {
+                        '_id': '$$REMOVE', 
+                        'vin': '$vin', 
+                        'act_id': '$act_id', 
+                        'scan_time': {
+                            '$dateToString': {
+                                'format': '%Y-%m-%d %H:%M:%S', 
+                                'date': '$scan_time'
+                            }
+                        }
+                    }
+                }
+            ])
+            resp_string = encoder.encode(list(resp))
+            return json.loads(resp_string), 200
     
     # POST
     @jwt_required
