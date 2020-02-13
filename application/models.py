@@ -1,5 +1,5 @@
 import flask
-import datetime
+from datetime import datetime
 from application import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -32,11 +32,11 @@ class Van(db.Document):
 class Schedule_wave(db.Document):
     wave_id = db.IntField( unique=True )
     company_id = db.IntField()
-    start_time = db.DateTimeField( default=datetime.datetime.now() )
-    end_time = db.DateTimeField( default=datetime.datetime.now() )
+    start_time = db.DateTimeField( default=datetime.now() )
+    end_time = db.DateTimeField( default=datetime.now() )
     status = db.BooleanField( default=True )
     
 class Activity(db.Document):
     act_id = db.IntField( unique=True )
     vin = db.StringField()
-    scan_time = db.DateTimeField( default=datetime.datetime.now() )
+    scan_time = db.DateTimeField( default=datetime.now() )
